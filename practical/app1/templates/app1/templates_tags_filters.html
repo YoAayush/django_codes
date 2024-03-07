@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+<body>
+    <h1>{{title}}</h1>
+    <p>Hello, {{user.name}}</p>
+    <p>your age is {{user.age}}</p>
+
+    {% if user.is_registered %}
+        <p>Welcome back, {{user.name}} !</p>
+    {% else %}
+        <p>please register to continue</p>
+    {% endif %}
+
+    <ul>
+        {% for num in numbers %}
+            <li>{{ num }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>Today's date is {{ current_time|date:'d-m-Y' }}</p>
+
+    <p>Random number: {{ numbers|random }}</p>  
+
+    <p>Capitalized: {{ user.name|capfirst }}</p>
+
+    <p>convert name into list: {{user.name|make_list}}</p>
+
+    <p>convert into lower aplhabet letters: {{temp|lower}}</p>
+
+</body>
+</html>

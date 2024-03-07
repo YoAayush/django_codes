@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>My first form in Django</title>
+    </head>
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            {{form}}
+            {% comment %} <input type="text" name="name" placeholder="Enter your name"> {% endcomment %}
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
