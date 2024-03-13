@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 # from django.utils import timezone
 from datetime import datetime,timedelta
+from .forms import form1,form2
 
 temp = '''
 <h1>Tags</h1><br>
@@ -63,3 +64,32 @@ def templates_tags_filters(request):
 
 def child2(request):
     return render(request, 'app1/child2.html')
+
+def f1(request):
+    if request.method == 'POST':
+        form = form1(request.POST)
+        Req_Email = "abc123@gmail.com"
+        Req_Password = "abc123"
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            if email == Req_Email and password == Req_Password:
+                return render(request,'app1/NewForm.html',{'email':email,'password':password})
+            else:
+                return HttpResponse("Invalid Credentials")
+    else:
+        form = form1()
+    return render(request,'app1/submit.html',{'form':form})
+
+def f2(request):
+    if request.method == 'POST':
+        form = form2(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            return render(request,'app1/FormData.html',{'name':name,'email':email,'subject':subject,'message':message})
+    else:
+        form = form2()
+    return render(request,'app1/submit.html',{'form':form})
