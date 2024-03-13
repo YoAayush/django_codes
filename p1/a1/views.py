@@ -22,7 +22,7 @@ def f1(request):
             email = form.cleaned_data['email']
             age = form.cleaned_data['age']
             print(first_name,last_name,email,age)
-            return HttpResponseRedirect('/form2/')
+            return render(request,'a1/NewForm.html',{'first_name':first_name,'last_name':last_name,'email':email,'age':age})
 
         # if form.is_valid():
         #     subject = form.cleaned_data["subject"]
@@ -39,7 +39,7 @@ def f1(request):
     return render(request,'a1/submit.html',{'form':form})
 
 def f2(request):
-    return HttpResponse("Thank You for submitting the form. We will get back to you soon.")
+    return render(request,'a1/NewForm.html')
 
 def main(request):
     d = {}
