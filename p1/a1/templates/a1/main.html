@@ -1,0 +1,11 @@
+{% comment %} <a href="{% url 'main' %}">Main Page</a>
+<a href="{% url 'about' %}">About Us</a>
+<a href="{% url 'contact' %}">Contact Us</a> {% endcomment %}
+{% comment %} <br> {% endcomment %}
+<form action="" method="POST">
+    {% csrf_token %}
+    Num1: <input type="text" name="num1" value="{{value1}}"><br>
+    Num2: <input type="text" name="num2" value="{{value2}}"><br>
+    Output: <input type="text" name="out" value="{{output}}" disabled><br>
+    <input type="submit" value="Submit">
+</form>

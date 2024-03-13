@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import form1
 from django.core.mail import send_mail
@@ -23,7 +23,7 @@ def f1(request):
             age = form.cleaned_data['age']
             print(first_name,last_name,email,age)
             return HttpResponseRedirect('/form2/')
-      
+
         # if form.is_valid():
         #     subject = form.cleaned_data["subject"]
         #     message = form.cleaned_data["message"]
@@ -40,3 +40,21 @@ def f1(request):
 
 def f2(request):
     return HttpResponse("Thank You for submitting the form. We will get back to you soon.")
+
+def main(request):
+    d = {}
+    try:
+        n1 = int(request.POST.get('num1'))
+        n2 = int(request.POST.get('num2'))
+        n3 = n1 + n2
+        d = {'value1':n1,'value2':n2,'output':n3}
+        if request.method == 'POST':
+            return HttpResponseRedirect(f'/thanks/?output={n3}')
+    except:
+        pass
+    return render(request,'a1/main.html',d)
+
+def t1(request):
+    if request.method == "GET":
+        output = request.GET.get('output')
+    return render(request,'a1/thanks.html',{'output':output})
