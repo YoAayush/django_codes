@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import form1
+from .forms import form1, ModelForm
 from django.core.mail import send_mail
+from .models import emp
 
 def index(request):
     return HttpResponse("this is default page")
@@ -58,3 +59,31 @@ def t1(request):
     if request.method == "GET":
         output = request.GET.get('output')
     return render(request,'a1/thanks.html',{'output':output})
+
+def home1(request):
+    if request.method == "POST":
+        form = ModelForm(request.POST)
+        if form.is_valid():
+            empno = form.cleaned_data['empno']
+            ename = form.cleaned_data['ename']
+            job = form.cleaned_data['job']
+            mgr = form.cleaned_data['mgr']
+            # hiredate = form.cleaned_data['hiredate']
+            sal = form.cleaned_data['sal']
+            comm = form.cleaned_data['comm']
+            deptno = form.cleaned_data['deptno']
+            p = emp(
+                empno = empno,
+                ename = ename,
+                job = job,
+                mgr = mgr,
+                # hiredate = hiredate,
+                sal = sal,
+                comm = comm,
+                deptno = deptno
+            )
+            p.save()
+            return render(request,'a1/ShowModelForm.html',{'p':p})
+    else:
+        form = ModelForm()
+    return render(request,'a1/ModelForm.html',{'form':form})

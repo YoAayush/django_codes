@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up Form - Django Assignment</title>
+
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: grid;
+        place-content: center;
+        height: 100vh;
+        background-color: #eee;
+      }
+
+      .g-1fr-1fr {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        padding: 30px;
+        gap: 30px;
+      }
+
+      .g-1fr-1fr-1fr {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+      }
+
+      .d-flex-c {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        background-color: #222536;
+        color: rgb(218, 218, 29);
+        justify-content: center;
+        text-align: start;
+      }
+
+      .gap {
+        gap: 25px !important;
+        text-align: end;
+      }
+
+      .width {
+        width: 500px;
+      }
+
+      .d-flex {
+        display: flex;
+        gap: 20px;
+        /* padding-left: 30px; */
+        /* justify-content: center; */
+      }
+
+      .orange {
+        background-color: #de8704;
+        color: aliceblue;
+        padding: 10px;
+        padding-left: 15px;
+      }
+
+      input,
+      select {
+        padding: 7px 10px;
+        outline: none;
+        border: none;
+        border-radius: 3px;
+      }
+
+      select {
+        cursor: pointer;
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        width: 20px;
+        cursor: pointer;
+      }
+
+      .agree {
+        margin-left: 39%;
+        margin-top: -25px;
+      }
+
+      button {
+        width: 120px;
+        height: 35px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        font-weight: 700;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .justify-right {
+        justify-content: right;
+        padding-right: 15px;
+        gap: 15px;
+      }
+
+      .green {
+        background-color: #5fb259;
+      }
+
+      .red {
+        background-color: #da534f;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="d-flex-c width">
+        <h2 class="heading orange">Sign Up Form</h2>
+        <div class="g-1fr-1fr">
+          <div class="d-flex-c gap">
+            {% for field in form %}
+              <h4>{{ field.label }}</h4>
+            {% endfor %}
+          </div>
+          <div class="d-flex-c">
+            {% for field in form %}
+              {% if field.name == 'gender' %}
+                <span class="d-flex gender">
+                  {% for choice in field %}
+                    {{ choice }}
+                  {% endfor %}
+                </span>
+              {% else %}
+                {{ field }}
+              {% endif %}
+            {% endfor %}
+          </div>        
+        </div>
+        <span class="d-flex agree">
+          <input type="checkbox" name="agree" id="agreed">
+          <h4>Agree to the terms of use</h4>
+        </span>
+        <span class="d-flex orange justify-right">
+          <button class="green" type="submit">Submit</button>
+          <button class="red" type="reset">Cancel</button>
+        </span>
+      </div>
+    </form>
+  </body>
+</html>
